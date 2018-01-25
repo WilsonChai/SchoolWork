@@ -1,4 +1,4 @@
-// File: menu.java
+// File: lab1.java
 // Name: Wilson Chai
 // Date: 01/24/18
 // Course: JAC444SDD - Introduction to Java
@@ -99,8 +99,6 @@ public class lab1{
 
       interest = tuition_year1*(Math.pow(1.05, 10)-1);
       System.out.printf("Cost of tuition in 10 years: %.2f\n", interest + tuition_year1);
-
-
       //System.out.printf("Debt after 10 years(4 years of tuition): %.2f", debt);
     }
     else if (selection==7){ // Number Triangle
