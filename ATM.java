@@ -1,3 +1,15 @@
+/**********************************************
+Workshop 1
+Course:JAC444 - Semester 4
+Last Name: Chai
+First Name: Wilson
+ID: 030-918-114
+Section: DD
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signed by Wilson Chai
+Date: February 13, 2018
+**********************************************/
+
 import java.util.Scanner;
 public class ATM{
     public static void main(String[] args){

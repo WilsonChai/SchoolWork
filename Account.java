@@ -1,3 +1,15 @@
+/**********************************************
+Workshop 1
+Course:JAC444 - Semester 4
+Last Name: Chai
+First Name: Wilson
+ID: 030-918-114
+Section: DD
+This assignment represents my own work in accordance with Seneca Academic Policy.
+Signed by Wilson Chai
+Date: February 13, 2018
+**********************************************/
+
 import java.util.Date;
 import java.util.Scanner;
 public class Account{
@@ -7,7 +19,7 @@ public class Account{
     private double annualInterestRate;
     private Date dateCreated;
 
-    // default constructors
+    // default constructor
     public Account(){
         this.id=0;
         this.balance=0;
@@ -15,6 +27,7 @@ public class Account{
         this.dateCreated=new Date();
     }
 
+    // constructor with id, balance
     public Account(int id, double balance){
         this.id=id;
         this.balance=balance;
@@ -90,10 +103,11 @@ public class Account{
     }
 }
 
+// CheckingAccount subclass - overrides withdraw method with overdraft limit
 class CheckingAccount extends Account{
     public void withdraw(double amount){
         if((this.get_balance()-amount)<0){
-            System.out.println("Warning: overdraft");
+            System.out.println("Overdraft limit");
         }
         else{
             this.set_balance(this.get_balance()-amount);
@@ -105,7 +119,16 @@ class CheckingAccount extends Account{
     }
 }
 
+// SavingsAccount subclass - overrides withdraw method with overdrawn limit
 class SavingsAccount extends Account{
+    public void withdraw(double amount){
+          if((this.get_balance()-amount)<0){
+              System.out.println("Overdrawn Limit");
+          }
+          else{
+              this.set_balance(this.get_balance()-amount);
+          }
+      }
     public String toString(){
         return "Greater Good!";
     }
