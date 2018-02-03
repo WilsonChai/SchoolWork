@@ -28,7 +28,7 @@ public class Location{
 
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
-        System.out.printf("Enter the number of rows and columns in the array: ");
+        System.out.print("Enter the number of rows and columns in the array: ");
         int rows = input.nextInt();
         int columns = input.nextInt();
 
