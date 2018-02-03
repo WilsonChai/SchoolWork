@@ -6,9 +6,9 @@ public class Location{
 
     // constructor
     public Location(){
-        row=0;
-        column=0;
-        maxValue=0;
+        this.row=0;
+        this.column=0;
+        this.maxValue=0;
     }
 
     public static Location locateLargest(double[][] a){

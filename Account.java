@@ -73,14 +73,40 @@ public class Account{
 
     // main method
     public static void main(String[] args){
-        Account acc = new Account();
+        Account account = new Account();
+        CheckingAccount checking = new CheckingAccount();
+        SavingsAccount savings = new SavingsAccount();
 
-        acc.set_id(1122); acc.set_balance(20000);
-        acc.set_annualInterestRate(0.045);
-        acc.withdraw(2500); acc.deposit(3000);
+        account.set_id(1122); account.set_balance(20000);
+        account.set_annualInterestRate(0.045);
+        account.withdraw(2500); account.deposit(3000);
 
-        System.out.printf("The balance is $%.2f\n",acc.get_balance());
-        System.out.printf("The monthly interest is $%.2f\n",acc.getMonthlyInterest());
-        System.out.println("Date account was created: "+acc.get_dateCreated());
+        System.out.printf("The balance is $%.2f\n",account.get_balance());
+        System.out.printf("The monthly interest is $%.2f\n",account.getMonthlyInterest());
+        System.out.println("Date account was created: "+account.get_dateCreated());
+
+        checking.withdraw(100);
+        System.out.println(checking.toString());
+    }
+}
+
+class CheckingAccount extends Account{
+    public void withdraw(double amount){
+        if((this.get_balance()-amount)<0){
+            System.out.println("Warning: overdraft");
+        }
+        else{
+            this.set_balance(this.get_balance()-amount);
+        }
+    }
+
+    public String toString(){
+        return "Success!";
+    }
+}
+
+class SavingsAccount extends Account{
+    public String toString(){
+        return "Greater Good!";
     }
 }

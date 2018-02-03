@@ -1,10 +1,10 @@
 import java.util.Scanner;
 public class ATM{
     public static void main(String[] args){
-        Account[] acc = new Account[10];
+        Account[] account = new Account[10];
 
         for(int i=0; i<10; i++){
-            acc[i] = new Account(i,100);
+            account[i] = new Account(i,100);
         }
 
         while(true){
@@ -28,17 +28,17 @@ public class ATM{
 
                     switch(choice){
                         case 1:
-                            System.out.println("The balance is "+acc[select_id].get_balance());
+                            System.out.println("The balance is "+account[select_id].get_balance());
                             break;
                         case 2:
                             System.out.print("Enter an amount to withdraw: ");
                             double withdraw_amount = input.nextDouble();
-                            acc[select_id].withdraw(withdraw_amount);
+                            account[select_id].withdraw(withdraw_amount);
                             break;
                         case 3:
                             System.out.print("Enter an amount to deposit: ");
                             double deposit_amount = input.nextDouble();
-                            acc[select_id].deposit(deposit_amount);
+                            account[select_id].deposit(deposit_amount);
                             break;
                         case 4:
                             break;
