@@ -75,7 +75,7 @@ public class lab1{
         value = (float)((monthlySaving + value) * (1.00417));
       }
 
-      System.out.println("After the sixth month, the account value is $" + value);
+      System.out.printf("After the sixth month, the account value is $%.2d", value);
     }
     else if (selection==4){ // Random month generator
       String[] month = {"January", "February", "March", "April", "May", "June",
