@@ -2,7 +2,6 @@ public class Queens {
 	/** Main method */
 	public static void main(String[] args) {
 		char[] board; // Create an array
-		System.out.flush();
 		System.out.print("Generating board... ");
 		// Repeat while queens are attacking
 		do {

@@ -27,7 +27,7 @@ public class Course{
     @Override
     public String toString(){
         String temp="";
-        for(int i=0; i<this.getNumberOfStudents(); i++){
+        for(int i=0; i<this.numberOfStudents; i++){
             temp+=students[i];
             temp+=", ";
         }
@@ -35,7 +35,7 @@ public class Course{
     }
 
     public void addStudent(String student){
-        this.students[this.getNumberOfStudents()]=student;
+        this.students[this.numberOfStudents]=student;
         this.numberOfStudents++;
     }
     public void dropStudent(String student){
@@ -53,8 +53,8 @@ public class Course{
         course2.addStudent("Wilson");
         course2.addStudent("Chai");
 
-        System.out.printf("Number of students in %s: %d\n",course1.getCourseName(),course1.getNumberOfStudents());
+        System.out.printf("Number of students in %s: %d\n",course1.courseName,course1.numberOfStudents);
         System.out.println(course1.toString());
-        System.out.printf("Number of students in %s: %d\n",course2.getCourseName(),course2.getNumberOfStudents());
+        System.out.printf("Number of students in %s: %d\n",course2.courseName,course2.numberOfStudents);
     }
 }

@@ -39,7 +39,19 @@ public class RevisedCourse{
         this.numberOfStudents++;
     }
     public void dropStudent(String student){
-        this.numberOfStudents--;
+        boolean studentExists=false;
+        for(int i=0; i<this.numberOfStudents; i++){
+            if(this.students[i]==student){
+                this.students[i]="";
+                this.numberOfStudents--;
+                System.out.println("Student successfully removed");
+                studentExists=true;
+                break;
+            }
+        }
+        if(studentExists==false){
+            System.out.println("Error: student doesn't exist!");
+        }
     }
 
     public static void main(String[] args){
@@ -52,6 +64,8 @@ public class RevisedCourse{
 
         course2.addStudent("Wilson");
         course2.addStudent("Chai");
+
+        course1.dropStudent("Peter Jones");
 
         System.out.printf("Number of students in %s: %d\n",course1.getCourseName(),course1.getNumberOfStudents());
         System.out.println(course1.toString());
