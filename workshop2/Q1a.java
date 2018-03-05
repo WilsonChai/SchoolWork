@@ -1,5 +1,5 @@
 /**********************************************
-Workshop 2
+Workshop 2 - Question 1 Part A
 Course:JAC444 - Semester 4
 Last Name: Chai
 First Name: Wilson
