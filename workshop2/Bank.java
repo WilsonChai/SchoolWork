@@ -50,7 +50,7 @@ public class Bank{
         return totalAssets;
     }
 
-    // this class declares the Loan object
+    // this class declares the Loan object for Bank
     class Loan{
         private int loan_id;
         private double loan_amount;
