@@ -30,7 +30,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Window;
 
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 public class Workshop3A extends Application {
+    Person person = new Person();
+
     @Override
     public void start(Stage stage) {
         //create labels
@@ -95,25 +105,23 @@ public class Workshop3A extends Application {
 
         //Detect button presses and does empty field checks
         add_button.setOnAction(new EventHandler<ActionEvent>() {
-            System.out.println(checkIfFieldEmpty(name_field, gridPane));
+            Person person1 = new Person(name_field.getText());
+
+            @Override
+            public void handle(ActionEvent event) {
+                if(name_field.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
+                    return;
+                } else{
+                    save(person1);
+                }
+            }
         });
 
         Scene scene = new Scene(gridPane); //Creating a scene object
         stage.setTitle("Address Book"); //Setting title to the Stage
         stage.setScene(scene); //Adding scene to the stage
         stage.show(); //Displaying the contents of the stage
-
-        public boolean checkIfFieldEmpty(TextField name_field, GridPane gridPane){
-            @Override
-            public void handle(ActionEvent event) {
-                if(name_field.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
-                    return true;
-                } else{
-                    return false;
-                }
-            }
-        }
     }
 
     private void showAlert(AlertType alertType, Window owner, String title, String message) {
@@ -123,6 +131,21 @@ public class Workshop3A extends Application {
         alert.setContentText(message);
         alert.initOwner(owner);
         alert.show();
+    }
+
+    public void save(Person person){
+        try {
+            FileOutputStream fos = new FileOutputStream("Address.dat");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(person);
+            System.out.println("Saving Done");
+
+            oos.close();
+            fos.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public static void main(String args[]){
