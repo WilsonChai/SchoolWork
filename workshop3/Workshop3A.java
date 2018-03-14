@@ -26,6 +26,10 @@ import javafx.scene.text.TextAlignment;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Window;
+
 public class Workshop3A extends Application {
     @Override
     public void start(Stage stage) {
@@ -44,11 +48,11 @@ public class Workshop3A extends Application {
         TextField zip_field = new TextField();
 
         //Set column width for fields
-        name_field.setPrefColumnCount(30);
-        street_field.setPrefColumnCount(30);
-        city_field.setPrefColumnCount(15);
+        name_field.setPrefColumnCount(32);
+        street_field.setPrefColumnCount(32);
+        city_field.setPrefColumnCount(20);
         state_field.setPrefColumnCount(2);
-        zip_field.setPrefColumnCount(6);
+        zip_field.setPrefColumnCount(5);
 
         //Creating Buttons
         Button add_button = new Button("Add");
@@ -57,6 +61,13 @@ public class Workshop3A extends Application {
         Button previous_button = new Button("Previous");
         Button last_button = new Button("Last");
         Button update_button = new Button("Update");
+
+        //Create buttons with flowPane
+        FlowPane flowPane = new FlowPane();
+        flowPane.setHgap(5);
+        flowPane.setAlignment(Pos.CENTER);
+        flowPane.getChildren().addAll(add_button, first_button, next_button,
+                                      previous_button, last_button, update_button);
 
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(400, 130); //Setting size for the gridPane
@@ -79,34 +90,33 @@ public class Workshop3A extends Application {
         gridPane.add(zip_label, 4, 2);
         gridPane.add(zip_field, 5, 2);
 
-        //Create buttons with flowPane
-        FlowPane flowPane = new FlowPane();
-        flowPane.setHgap(5);
-        flowPane.setAlignment(Pos.CENTER);
-        flowPane.getChildren().addAll(add_button, first_button, next_button,
-                                      previous_button, last_button, update_button);
-
-        //Add flowPlan to gridPane
+        //Add flowPane to gridPane
         gridPane.add(flowPane, 0, 3, 9, 1);
 
         //Detect button presses and does empty field checks
         add_button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(name_field.getText().isEmpty()) {
-                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
-                    return;
-                }
-            }
+            System.out.println(checkIfFieldEmpty(name_field, gridPane));
         });
 
         Scene scene = new Scene(gridPane); //Creating a scene object
         stage.setTitle("Address Book"); //Setting title to the Stage
         stage.setScene(scene); //Adding scene to the stage
         stage.show(); //Displaying the contents of the stage
+
+        public boolean checkIfFieldEmpty(TextField name_field, GridPane gridPane){
+            @Override
+            public void handle(ActionEvent event) {
+                if(name_field.getText().isEmpty()) {
+                    showAlert(Alert.AlertType.ERROR, gridPane.getScene().getWindow(), "Form Error!", "Please enter your name");
+                    return true;
+                } else{
+                    return false;
+                }
+            }
+        }
     }
 
-    private void showAlert(Alert.AlertType alertType, Window owner, String title, String message) {
+    private void showAlert(AlertType alertType, Window owner, String title, String message) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
