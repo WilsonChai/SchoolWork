@@ -9,14 +9,17 @@
    Signed by Wilson Chai
    Date: April 3, 2018
 **********************************************/
-import java.util.Scanner;
+import java.util.*;
+import java.util.Collections;
 import java.util.regex.*;
+
+import java.io.*;
 
 public class Workshop4T2{
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         boolean menu_continue = true;
-        int year, rank=0;
+        int year, rank = 0;
         char gender;
         String name;
 
@@ -25,11 +28,43 @@ public class Workshop4T2{
             gender = getGender(input);
             name = getName(input);
 
-            System.out.println("Boy name " + name + " is ranked " + rank + " in year " + year);
+            rank=findName(year, gender, name);
+
+            if(rank>0){
+                System.out.println(((gender=='M')?"Boy":"Girl")+" name " + name + " is ranked #" + rank + " in year " + year);
+            } else {
+                System.out.println("The "+((gender=='M')?"boy":"girl")+" name " + name + " is not on the list.");
+            }
 
             menu_continue = getInquiry(input);
 
         }while(menu_continue);
+    }
+
+    public static int findName(int year, char gender, String name){
+        String fileName = "babynamesranking/babynamesranking"+Integer.toString(year)+".txt";
+        String line=null;
+        int rank = 0, lineNumber = 0;
+        try{
+            FileReader fileReader = new FileReader(fileName);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null){
+                String[] columns = line.split("[ \\t].");
+                if(gender=='M' && name.equals(columns[1])){
+                    rank = lineNumber+1;
+                } else if(gender=='F' && name.equals(columns[3])){
+                    rank = lineNumber+1;
+                }
+                lineNumber++;
+            }
+            fileReader.close();
+        } catch(FileNotFoundException ex){
+            System.out.println("File not found: "+ex);
+        } catch(IOException x){
+            System.out.println("I/O Exception: "+x);
+        }
+        return rank;
     }
 
     public static int getYear(Scanner input){

@@ -1,5 +1,5 @@
 /**********************************************
-   Workshop 4 - Task 1A
+   Workshop 4 - Task 1C
    Course:JAC444 - Semester 4
    Last Name: Chai
    First Name: Wilson
@@ -9,11 +9,12 @@
    Signed by Wilson Chai
    Date: April 3, 2018
 **********************************************/
-import java.util.*;
+import java.util.List;
+import java.util.Arrays;
 
-public class Workshop4T1A {
+public class Workshop4T1C {
     public static void main(String[] args){
-        List<String> topNames2017 = Arrays.asList(
+        List<String>topNames2017 = Arrays.asList(
             "Amelia",
             "Olivia",
             "emily",
@@ -26,9 +27,10 @@ public class Workshop4T1A {
             "Jacob"
         );
 
-        List<String> newList = new ArrayList<String>();
-        topNames2017.forEach(name->newList.add(Character.toUpperCase(name.charAt(0))+name.substring(1)));
-        newList.sort((a,b)->a.compareTo(b));
-        newList.forEach(name->System.out.println(name));
+        topNames2017
+            .stream()
+            .map(name->{return Character.toUpperCase(name.charAt(0))+name.substring(1);})
+            .sorted()
+            .forEach(System.out::println);
     }
 }
