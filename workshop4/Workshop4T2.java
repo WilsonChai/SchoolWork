@@ -10,12 +10,11 @@
    Date: April 3, 2018
 **********************************************/
 import java.util.*;
-import java.util.Collections;
 import java.util.regex.*;
-
 import java.io.*;
 
 public class Workshop4T2{
+    //main method
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         boolean menu_continue = true;
@@ -23,16 +22,17 @@ public class Workshop4T2{
         char gender;
         String name;
 
+        //main menu
         do{
             year = getYear(input);
             gender = getGender(input);
             name = getName(input);
 
-            rank=findName(year, gender, name);
+            rank = findName(year, gender, name); //returns 0 if name not found
 
-            if(rank>0){
+            if(rank>0){ //name found
                 System.out.println(((gender=='M')?"Boy":"Girl")+" name " + name + " is ranked #" + rank + " in year " + year);
-            } else {
+            } else { //name not found
                 System.out.println("The "+((gender=='M')?"boy":"girl")+" name " + name + " is not on the list.");
             }
 
@@ -41,6 +41,7 @@ public class Workshop4T2{
         }while(menu_continue);
     }
 
+    //find the name in the file and returns the rank (returns 0 if not found)
     public static int findName(int year, char gender, String name){
         String fileName = "babynamesranking/babynamesranking"+Integer.toString(year)+".txt";
         String line=null;
@@ -50,11 +51,11 @@ public class Workshop4T2{
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while((line = bufferedReader.readLine()) != null){
-                String[] columns = line.split("[ \\t].");
+                String[] columns = line.split("[ \\t]."); //sort into columns by space and tab
                 if(gender=='M' && name.equals(columns[1])){
-                    rank = lineNumber+1;
+                    rank = lineNumber+1; break;
                 } else if(gender=='F' && name.equals(columns[3])){
-                    rank = lineNumber+1;
+                    rank = lineNumber+1; break;
                 }
                 lineNumber++;
             }
@@ -67,6 +68,7 @@ public class Workshop4T2{
         return rank;
     }
 
+    // input validation methods for year, gender, name, and inquiry
     public static int getYear(Scanner input){
         int year;
         do{
@@ -88,10 +90,10 @@ public class Workshop4T2{
         do{
             System.out.print("Enter the gender: ");
             gender = input.next();
-            if(!Pattern.matches("[mMfF]{1}", gender)){
+            if(!Pattern.matches("[MF]{1}", gender)){
                 System.out.println("ERROR: Only M or F accepted!");
             }
-        }while(!Pattern.matches("[mMfF]{1}", gender));
+        }while(!Pattern.matches("[MF]{1}", gender));
         return gender.charAt(0);
     }
 
